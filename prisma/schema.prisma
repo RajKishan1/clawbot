@@ -1,0 +1,103 @@
+// MVP Slice 1 — minimal schema: User, Agent, Channel, Conversation, Message.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  kindeId      String?  @unique @map("kinde_id")
+  email        String   @unique
+  passwordHash String?  @map("password_hash")
+  name         String?
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  agents  Agent[]
+  apiKeys ApiKey[]
+
+  @@map("users")
+}
+
+model Agent {
+  id           String   @id @default(uuid()) @db.Uuid
+  userId       String   @map("user_id") @db.Uuid
+  name         String
+  description  String?  @db.Text
+  systemPrompt String?  @map("system_prompt")
+  modelKey     String   @map("model_key")
+  modelParams  Json?    @map("model_params")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  channels      Channel[]
+  conversations Conversation[]
+
+  @@map("agents")
+}
+
+model Channel {
+  id               String   @id @default(uuid()) @db.Uuid
+  agentId          String   @map("agent_id") @db.Uuid
+  platform         String   @default("telegram")
+  externalId       String?  @map("external_id")
+  telegramBotToken String   @map("telegram_bot_token") // bot token; store securely in production
+  webhookSecret    String   @map("webhook_secret")    // used in webhook URL path for validation
+  status           String   @default("active")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  agent         Agent          @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  conversations Conversation[]
+
+  @@unique([agentId, platform])
+  @@map("channels")
+}
+
+model Conversation {
+  id             String   @id @default(uuid()) @db.Uuid
+  agentId        String   @map("agent_id") @db.Uuid
+  channelId      String?  @map("channel_id") @db.Uuid
+  telegramChatId String   @map("telegram_chat_id")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  agent    Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  channel  Channel? @relation(fields: [channelId], references: [id], onDelete: SetNull)
+  messages Message[]
+
+  @@unique([agentId, telegramChatId])
+  @@map("conversations")
+}
+
+model Message {
+  id             String   @id @default(uuid()) @db.Uuid
+  conversationId String   @map("conversation_id") @db.Uuid
+  role           String
+  content        String   @db.Text
+  source         String   @default("telegram")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+}
+
+model ApiKey {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  name      String?
+  keyHash   String   @map("key_hash")
+  keyPrefix String?  @map("key_prefix")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("api_keys")
+}
