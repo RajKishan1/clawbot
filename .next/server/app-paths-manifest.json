@@ -1,1 +1,15 @@
-{}
+{
+  "/api/webhooks/telegram/[secret]/route": "app/api/webhooks/telegram/[secret]/route.js",
+  "/page": "app/page.js",
+  "/api/auth/[kindeAuth]/route": "app/api/auth/[kindeAuth]/route.js",
+  "/api/agents/[id]/route": "app/api/agents/[id]/route.js",
+  "/api/agents/route": "app/api/agents/route.js",
+  "/api/agents/[id]/channel/route": "app/api/agents/[id]/channel/route.js",
+  "/api/agents/[id]/conversations/route": "app/api/agents/[id]/conversations/route.js",
+  "/api/conversations/[id]/messages/route": "app/api/conversations/[id]/messages/route.js",
+  "/(dashboard)/agents/[id]/page": "app/(dashboard)/agents/[id]/page.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js",
+  "/(dashboard)/dashboard/page": "app/(dashboard)/dashboard/page.js",
+  "/(dashboard)/agents/[id]/conversations/[convId]/page": "app/(dashboard)/agents/[id]/conversations/[convId]/page.js",
+  "/(dashboard)/agents/page": "app/(dashboard)/agents/page.js"
+}

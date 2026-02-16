@@ -4,7 +4,11 @@ export function createOpenAIAdapter(apiKey?: string): LLMAdapter {
   const key = apiKey ?? process.env.OPENAI_API_KEY;
   return {
     async complete(messages: LLMMessage[], options?: LLMCompleteOptions): Promise<string> {
-      if (!key) throw new Error('OpenAI API key not configured');
+      if (!key) {
+        console.error('[llm/openai] OpenAI API key not configured');
+        throw new Error('OpenAI API key not configured');
+      }
+      console.log('[llm/openai] Calling OpenAI API:', { model: options?.model ?? 'gpt-4o-mini', messageCount: messages.length });
       const body = {
         model: options?.model ?? 'gpt-4o-mini',
         messages: messages.map((m) => ({ role: m.role, content: m.content })),
@@ -21,10 +25,13 @@ export function createOpenAIAdapter(apiKey?: string): LLMAdapter {
       });
       if (!res.ok) {
         const err = await res.text();
+        console.error('[llm/openai] OpenAI API error:', res.status, err);
         throw new Error(`OpenAI API error: ${res.status} ${err}`);
       }
       const data = (await res.json()) as { choices?: Array<{ message?: { content?: string } }> };
-      return data.choices?.[0]?.message?.content ?? '';
+      const reply = data.choices?.[0]?.message?.content ?? '';
+      console.log('[llm/openai] OpenAI response received:', reply.substring(0, 100));
+      return reply;
     },
   };
 }

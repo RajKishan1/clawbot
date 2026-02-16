@@ -25,8 +25,14 @@ export type RunAgentOptions = {
 export async function runAgent(options: RunAgentOptions): Promise<string> {
   const { agentId, conversationKey, userMessage, source = 'telegram', channelId } = options;
 
+  console.log('[agent-runtime] Starting runAgent:', { agentId, conversationKey, userMessage: userMessage.substring(0, 50) });
+  
   const agent = await prisma.agent.findUnique({ where: { id: agentId } });
-  if (!agent) throw new NotFoundError('Agent');
+  if (!agent) {
+    console.error('[agent-runtime] Agent not found:', agentId);
+    throw new NotFoundError('Agent');
+  }
+  console.log('[agent-runtime] Agent loaded:', { name: agent.name, modelKey: agent.modelKey });
 
   let conversation = await prisma.conversation.findUnique({
     where: { agentId_telegramChatId: { agentId, telegramChatId: conversationKey } },
@@ -70,11 +76,13 @@ export async function runAgent(options: RunAgentOptions): Promise<string> {
 
   const adapter = getLLMAdapter(agent.modelKey);
   const modelParams = (agent.modelParams as { temperature?: number; maxTokens?: number } | null) ?? {};
+  console.log('[agent-runtime] Calling LLM:', { model: agent.modelKey, messageCount: llmMessages.length });
   const reply = await adapter.complete(llmMessages, {
     model: agent.modelKey,
     temperature: modelParams.temperature ?? 0.7,
     maxTokens: modelParams.maxTokens ?? 1024,
   });
+  console.log('[agent-runtime] LLM reply received:', reply.substring(0, 100));
 
   await prisma.message.create({
     data: { conversationId: conversation.id, role: 'assistant', content: reply, source },
