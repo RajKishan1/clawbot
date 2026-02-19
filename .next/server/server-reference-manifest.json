@@ -1,1 +1,16 @@
-{"node":{"7a0a2697906f05ca596f72cd5a64708c4b2b6b99":{"workers":{"app/_not-found/page":"740","app/page":"740","app/(auth)/signup/page":"740","app/(auth)/login/page":"740","app/(dashboard)/agents/[id]/page":"740","app/(dashboard)/agents/[id]/edit/page":"740","app/(dashboard)/agents/new/page":"740","app/(dashboard)/agents/[id]/conversations/[convId]/page":"740","app/(dashboard)/dashboard/page":"740","app/(dashboard)/agents/page":"740","app/(dashboard)/settings/page":"740"},"layer":{"app/_not-found/page":"action-browser","app/page":"action-browser","app/(auth)/signup/page":"action-browser","app/(auth)/login/page":"action-browser","app/(dashboard)/agents/[id]/page":"action-browser","app/(dashboard)/agents/[id]/edit/page":"action-browser","app/(dashboard)/agents/new/page":"action-browser","app/(dashboard)/agents/[id]/conversations/[convId]/page":"action-browser","app/(dashboard)/dashboard/page":"action-browser","app/(dashboard)/agents/page":"action-browser","app/(dashboard)/settings/page":"action-browser"}}},"edge":{},"encryptionKey":"zHfhb5apmn0Fyq7lJVjvgpQ/S0O78L2UEcJa+tCsnHQ="}
+{
+  "node": {
+    "7a0a2697906f05ca596f72cd5a64708c4b2b6b99": {
+      "workers": {
+        "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Crajki%5C%5CDesktop%5C%5Cclawbot%5C%5Cfrontend%5C%5Cnode_modules%5C%5C%40kinde-oss%5C%5Ckinde-auth-nextjs%5C%5Cdist%5C%5Csrc%5C%5Csession%5C%5CrefreshTokensServerAction.es.js%22%2C%5B%22refreshTokensServerAction%22%5D%5D%5D&__client_imported__=true!",
+        "app/(auth)/login/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Crajki%5C%5CDesktop%5C%5Cclawbot%5C%5Cfrontend%5C%5Cnode_modules%5C%5C%40kinde-oss%5C%5Ckinde-auth-nextjs%5C%5Cdist%5C%5Csrc%5C%5Csession%5C%5CrefreshTokensServerAction.es.js%22%2C%5B%22refreshTokensServerAction%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/page": "action-browser",
+        "app/(auth)/login/page": "action-browser"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "uOHWZ/JnigzB33E8Wle+KvyphNoLDRM0DLjGYMDg/yE="
+}
