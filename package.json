@@ -5,14 +5,13 @@
   "description": "ai agent",
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
   "main": "index.js",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "db:generate": "prisma generate",
