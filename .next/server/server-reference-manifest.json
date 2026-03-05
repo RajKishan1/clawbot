@@ -2,13 +2,13 @@
   "node": {
     "7a0a2697906f05ca596f72cd5a64708c4b2b6b99": {
       "workers": {
-        "app/(auth)/login/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Crajki%5C%5CDesktop%5C%5Cclawbot%5C%5Cfrontend%5C%5Cnode_modules%5C%5C%40kinde-oss%5C%5Ckinde-auth-nextjs%5C%5Cdist%5C%5Csrc%5C%5Csession%5C%5CrefreshTokensServerAction.es.js%22%2C%5B%22refreshTokensServerAction%22%5D%5D%5D&__client_imported__=true!"
+        "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Crajki%5C%5CDesktop%5C%5Cclawbot%5C%5Cfrontend%5C%5Cnode_modules%5C%5C%40kinde-oss%5C%5Ckinde-auth-nextjs%5C%5Cdist%5C%5Csrc%5C%5Csession%5C%5CrefreshTokensServerAction.es.js%22%2C%5B%22refreshTokensServerAction%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
-        "app/(auth)/login/page": "action-browser"
+        "app/page": "action-browser"
       }
     }
   },
   "edge": {},
-  "encryptionKey": "7cjZJK138Q2HoZlmgJokt1npcziO07v2s58V2us7vcE="
+  "encryptionKey": "FsO3rI0IDXVWmAwhc9wfPCXewh1QKn8peZ/OREygC/Y="
 }
