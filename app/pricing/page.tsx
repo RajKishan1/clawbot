@@ -293,7 +293,7 @@ const PlanCard: FC<{ plan: Plan; annual: boolean }> = ({ plan, annual }) => {
         href={
           plan.ctaVariant === "outline" && plan.name === "Enterprise"
             ? "mailto:sales@claw.ai"
-            : "#"
+            : "/api/checkout"
         }
         className="f-mono text-xs tracking-wider"
         style={{
